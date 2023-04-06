@@ -11,6 +11,9 @@ __pycache__
 **/labs/
 **/notes/
 **/archives/
+**/notebooks/bert-finetuned-cryptos
+**/notebooks/data
+**/notebooks/models
 venv
 db.sqlite3
 local_settings.py
