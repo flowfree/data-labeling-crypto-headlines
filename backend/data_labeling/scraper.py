@@ -37,6 +37,7 @@ def get_metadata_from_url(url: str) -> dict:
         try:
             r = requests.get(url, headers=headers)
             r.raise_for_status()
+            break
         except requests.exceptions.SSLError as e:
             logging.error(e)
             if retries == 0:
