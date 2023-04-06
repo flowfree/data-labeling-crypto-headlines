@@ -3,8 +3,7 @@ import re
 
 from django.db import models
 
-from news_sentiment import scraper
-from news_sentiment.exceptions import ScraperError
+from .scraper import get_metadata_from_url, ScraperError
 
 
 class Site(models.Model):
@@ -48,7 +47,7 @@ class News(models.Model):
         if not self.title and not self.description:
             self.site = self._get_site(self.url)
 
-            meta = scraper.get_metadata_from_url(self.url)
+            meta = get_metadata_from_url(self.url)
             self.title = meta.get('title', '')
             self.description = meta.get('description', '')
             self.image_url = meta.get('image_url', '')

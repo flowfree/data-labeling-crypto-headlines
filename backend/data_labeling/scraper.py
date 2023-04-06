@@ -1,7 +1,12 @@
+import time 
+import logging
+
 from bs4 import BeautifulSoup
 import requests 
 
-from .exceptions import ScraperError 
+
+class ScraperError(Exception):
+    pass
 
 
 def get_metadata_from_url(url: str) -> dict:
@@ -27,11 +32,20 @@ def get_metadata_from_url(url: str) -> dict:
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
     }
 
-    try:
-        r = requests.get(url, headers=headers)
-        r.raise_for_status()
-    except requests.exceptions.HTTPError as e:
-        raise ScraperError(e)
+    retries = 5
+    while True:
+        try:
+            r = requests.get(url, headers=headers)
+            r.raise_for_status()
+        except requests.exceptions.SSLError as e:
+            logging.error(e)
+            if retries == 0:
+                raise ScraperError(e) 
+            retries -= 1
+            time.sleep(3)
+            continue
+        except requests.exceptions.HTTPError as e:
+            raise ScraperError(e)
 
     soup = BeautifulSoup(r.text, "html.parser")
 

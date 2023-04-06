@@ -67,7 +67,6 @@ INSTALLED_APPS = [
 
     'accounts',
     'data_labeling',
-    'news_sentiment',
 ]
 
 MIDDLEWARE = [

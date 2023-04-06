@@ -1,5 +1,5 @@
 {
-  "name": "news-sentiment-frontend",
+  "name": "data-labeling-crypto-sentiment-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
