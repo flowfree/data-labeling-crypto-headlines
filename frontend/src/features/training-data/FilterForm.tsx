@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { PrimaryButtonLink, SecondaryButton, PlainButton } from '../../components/Buttons'
-import { MagnifyingGlassIcon, ArrowPathIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { SecondaryButton, PlainButton } from '../../components/Buttons'
+import { MagnifyingGlassIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
 
 interface Props {
   className?: string
@@ -10,7 +10,6 @@ interface Props {
 
 export default function FilterForm({ className, onSearch, onRefresh }: Props) {
   const [query, setQuery] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()

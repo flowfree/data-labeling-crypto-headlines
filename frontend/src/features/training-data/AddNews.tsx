@@ -3,7 +3,6 @@ import { useState } from 'react'
 import NewsService from '../../services/NewsService'
 import NewsCard from '../../components/NewsCard'
 import SentimentLabel from '../../components/SentimentLabel'
-import { SecondaryButtonLink } from '../../components/Buttons'
 
 export default function AddNews() {
   const [url, setUrl] = useState('')
@@ -30,7 +29,7 @@ export default function AddNews() {
       setErrorMessage('')
       setIsSubmitting(true)
       const response = await newsService.addNews(url, sentiment)
-      if (newsList.length == 4) {
+      if (newsList.length === 4) {
         newsList.pop()
       } 
       setNewsList([response.data, ...newsList])

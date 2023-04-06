@@ -20,28 +20,28 @@ export default function NewsList() {
   }, [])
   
   useEffect(() => {
-    async function loadNewsList() {
-      if (url) {
-        try {
-          setIsLoading(true)
-          const response = await newsService.getNewsList(url, filters)
-          if (url === NEWS_ENDPOINT_PATH) {
-            setNewsList(response.data.results)
-          } else {
-            setNewsList([...newsList, ...response.data.results])
-          }
-          setNextUrl(response.data.next)
-        } catch (e) {
-          console.error(e)
-        } finally {
-          setIsLoading(false)
-          setUrl('')
-        }
-      }
+    if (url) {
+      loadNewsList()
     }
-
-    loadNewsList()
   }, [url])
+
+  async function loadNewsList() {
+    try {
+      setIsLoading(true)
+      const response = await newsService.getNewsList(url, filters)
+      if (url === NEWS_ENDPOINT_PATH) {
+        setNewsList(response.data.results)
+      } else {
+        setNewsList([...newsList, ...response.data.results])
+      }
+      setNextUrl(response.data.next)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setIsLoading(false)
+      setUrl('')
+    }
+  }
 
   async function handleDelete(id: number) {
     try {

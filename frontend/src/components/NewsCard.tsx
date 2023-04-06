@@ -18,11 +18,11 @@ export default function NewsCard({ news, sentiment, onDelete }: NewsCardProps) {
   return (
     <div className={` group relative flex flex-col overflow-hidden rounded-lg border ${deleteConfirmation ? 'border-pink-400 bg-pink-100' : 'border-gray-200'}`}>
       <div className="aspect-w-4 aspect-h-3 bg-gray-200 sm:aspect-none sm:h-48">
-        <a href={news.url} target="_blank">
+        <a href={news.url} target="_blank" rel="noreferrer">
           <img
             src={news.imageUrl}
             className={`h-full w-full object-cover object-center sm:h-full sm:w-full ${deleteConfirmation ? 'opacity-50': ''}`}
-            alt="image"
+            alt=""
           />
         </a>
       </div>
@@ -31,7 +31,7 @@ export default function NewsCard({ news, sentiment, onDelete }: NewsCardProps) {
           {sentiment}
         </div>
         <h3 className="text-base font-medium text-gray-900 line-clamp-2">
-          <a href={news.url} title={news.title} target="_blank">
+          <a href={news.url} title={news.title} target="_blank" rel="noreferrer">
             {news.title}
           </a>
         </h3>
